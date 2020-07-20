@@ -1,0 +1,20 @@
+.myForm{
+    display: none;
+    width:100%;
+
+}
+
+.myText{
+    border:none;
+    outline: none;
+    background: #f0ff98;
+}
+
+.myText:focus{
+   background:hsl(0, 0%, 68%);
+}
+
+.myButton{
+    background: none;
+    border: none;
+}

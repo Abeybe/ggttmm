@@ -1,0 +1,29 @@
+{
+    "name": "ggttmm",
+    "version": "1.0",
+    "description": "ぐぐってメモ",
+    "permissions": [
+      "declarativeContent", "storage",
+      "contextMenus","tabs","file:///*/*"
+    ],
+    "content_scripts": [
+        {
+          "matches": ["https://www.google.com/*"],
+          "js": [
+            "jquery.min.js",
+            "searchMemo.js"
+            ],
+            "css":["myStyle.css"],
+            "run_at": "document_start"
+        }
+      ],
+      "page_action": {
+        "default_popup": "popup.html"
+      },
+    "background": {
+      "matches": ["https://www.google.com/*","chrome-extension://"],
+      "scripts": ["jquery.min.js","background.js"]
+      
+    },
+    "manifest_version": 2
+}
