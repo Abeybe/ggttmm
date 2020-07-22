@@ -21,8 +21,7 @@
         "default_popup": "popup.html"
       },
     "background": {
-      "matches": ["https://www.google.com/*","chrome-extension://"],
-      "scripts": ["jquery.min.js","background.js"]
+      "scripts": ["background.js"]
       
     },
     "manifest_version": 2
