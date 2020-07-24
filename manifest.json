@@ -7,19 +7,20 @@
       "contextMenus","tabs","file:///*/*"
     ],
     "content_scripts": [
-        {
-          "matches": ["https://www.google.com/*"],
-          "js": [
-            "jquery.min.js",
-            "ggttmm.js"
-            ],
-            "css":["myStyle.css"],
-            "run_at": "document_start"
-        }
-      ],
-      "page_action": {
-        "default_popup": "popup.html"
-      },
+      {
+        "matches": ["https://www.google.com/*"],
+        "js": [
+          "jquery.min.js",
+          "ggttmm.js"
+          ],
+          "css":["myStyle.css"],
+          "run_at": "document_start"
+      }
+    ],
+    "page_action": {
+      "default_popup": "popup.html"
+    },
+    "web_accessible_resources":["source/ggttmm.png"],
     "background": {
       "scripts": ["background.js"]
       

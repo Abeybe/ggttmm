@@ -1,7 +1,17 @@
+.ggttmmLayout{
+    width:100%;
+}
+
 .myForm{
     display: none;
-    width:100%;
+    width:calc(100% - 32px);
+}
 
+img.openMemo{
+    width:32px;
+    height:16px;
+    display: inline-block;
+    vertical-align:middle;
 }
 
 .myText{
