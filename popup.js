@@ -1,10 +1,10 @@
 const APPTAG="[ggttmm]:";
+var colors=["blue","green","yellow","red"];
 
 window.onload=function(){
     chrome.storage.sync.get(function(items){     
-        var tableText=
-            "<table class='ggttmmTable'>"+
-            "<tr><th>Memo</th><th>Final Search Words</th><th>Site Name</th></tr>";
+        var tableText="";
+        var forCount=0;
         for(key in items){
             console.log(key,items[key]);
             if(key && key.indexOf(APPTAG)==0){
@@ -13,19 +13,24 @@ window.onload=function(){
                 var title=(items[key])?(items[key].length>2)?items[key][2]:items[key]:url;
                 var url=key.replace(APPTAG,"");
                 tableText+=(
-                    "<tr>"+
-                        "<td><form>"+
-                            "<input type='text' class='myText' value='"+memo+"' placeholder='Enter/更新で削除' />"+
-                            "<input type='text' class='myHiddenURL' value='"+url+"' style='display:none' />"+
-                            "<input type='hidden' class='myHiddenSearch' value='"+search+"' style='display:none' />"+
-                            "<input type='hidden' class='myHiddenTitle' value='"+title+"' style='display:none' />"+
-                            "<input type='button' class='myButton' value='更新' />"+
-                        "</form></td>"+
-                        "<td><a href='https://www.google.com/search?q="+search+"' target='_blank'>"+search+"</a></td>"+
-                        "<td><a href='"+url+"' target='_blank'>"+title+"</a></td>"+
-                    "</tr>"
+                    "<div class='memo "+colors[forCount%colors.length]+"'>"+
+                        "<div class='title'>"+
+                            "<form class='myForm' >"+
+                                "<input type='text' class='myText' value='"+memo+"' placeholder='Enter/更新で削除' disabled/>"+
+                                "<input type='text' class='myHiddenURL' value='"+url+"' style='display:none' />"+
+                                "<input type='hidden' class='myHiddenSearch' value='"+search+"' style='display:none' />"+
+                                "<input type='hidden' class='myHiddenTitle' value='"+title+"' style='display:none' />"+
+                                "<input type='button' class='myButton' value='編集' />"+
+                            "</form>"+
+                        "</div>"+
+                        "<div class='links'>"+
+                            "<div>Search Words</div><a href='https://www.google.com/search?q="+search+"' target='_blank'>"+search+"</a>"+
+                            "<div>Site Link</div><a href='"+url+"' target='_blank'>"+title+"</a>"+
+                        "</div>"+
+                    "</div>"
                 );
             }
+            forCount++;
         }
         $("body").append(tableText);
         setEvent();
@@ -41,7 +46,13 @@ function setEvent(){
         }
     });
     $(".myButton").on("click",function(e){
-        changeStorage($(this).parent());
+        if($(this).val()=="編集"){
+            $(this).parent().find(".myText").prop("disabled",false);
+            $(this).val("更新");
+            $(this).toggleClass("check");
+        }else if($(this).val()=="更新"){
+            changeStorage($(this).parent());
+        }
     });
 }
 
@@ -58,6 +69,9 @@ function changeStorage(element){
         chrome.storage.sync.get(key,function(item){
             chrome.storage.sync.set({[key]:[text,search,title]},function(){
                 console.log("Updated");
+                $(element).find(".myText").prop("disabled",true);
+                $(element).find(".myButton").toggleClass("check");
+                $(element).find(".myButton").val("編集");
             });
         })
     }
