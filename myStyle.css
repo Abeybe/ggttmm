@@ -1,5 +1,6 @@
 .ggttmmLayout{
     width:100%;
+    display:inline-block;
 }
 
 .myForm{
@@ -15,6 +16,7 @@ img.openMemo{
 }
 
 .myText{
+    display: inline-block;
     border:none;
     outline: none;
     background: #f0ff98;
