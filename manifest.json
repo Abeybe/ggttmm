@@ -20,7 +20,10 @@
     "page_action": {
       "default_popup": "popup.html"
     },
-    "web_accessible_resources":["source/ggttmm.png"],
+    "web_accessible_resources":[
+      "source/ggttmm.png",
+      "source/check.png"
+    ],
     "background": {
       "scripts": ["background.js"]
       

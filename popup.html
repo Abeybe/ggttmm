@@ -5,7 +5,7 @@
     <script type="text/javascript" src="jquery.min.js"></script>
     <style>
         body{
-            padding: 5%;
+            padding: 10% 5% 5% 5%;
             background-color: green;
             background-image:url("source/note.png");
             background-size: cover;
@@ -52,11 +52,12 @@
             overflow: hidden;
             display: block;
         }
+
         form.myForm{
             width:100%;
         }
         input.myText{
-            width:calc(98% - 50px);
+            width:calc(98% - 48px);
         }
         input.myButton{
             width:50px;
@@ -84,7 +85,20 @@
             border:none;
             background-color: transparent;
         }
+
+        .memories{
+            display: inline-block;
+            width:50%;
+        }
+        .search{
+            display:inline-block;
+            width:50%;
+        }
         a.pageLink{
+            display: inline;
+            vertical-align:middle;
+        }
+        a.pageTitle{
             display: inline;
             vertical-align:middle;
         }

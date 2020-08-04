@@ -10,13 +10,13 @@ $(function(){
         var image= chrome.extension.getURL("source/ggttmm.png");
         chrome.storage.sync.get(APPTAG+url,function(item){
             var key=APPTAG+url;
-            val=(item[key])?(item[key].length>0)?item[key][0]:item[key]:"";
+            // val=(item[key])?(item[key].length>0)?item[key][0]:item[key]:"";
+            var val=(item[key] && item[key]["text"])?item[key]["text"]:"";
             var formHtml=
                 "<div class='ggttmmLayout'>"+
-                    "<img class='openMemo' src='"+image+"' />"+
-                    "<form class='myForm' "+((val=="")?"style='display:none'":"style='display:inline-block'")+"' >"+
+                    "<img class='openMemo' src='"+image+"' /><form class='myForm' "+((val=="")?"style='display:none'":"style='display:inline-block'")+"' >"+
                         "<input type='text' class='myText' placefolder='' value='"+val+"' />"+
-                        "<input type='button' class='myButton' value='保存'  />"+
+                        "<input type='button' class='myButton' value=''  />"+
                         "<input type='text' class='myHiddenText' style='display:none' />"+
                         "<input type='hidden' class='myHiddenURL' value='"+url+"' />"+
                         "<input type='hidden' class='myHiddenTitle' value='"+title+"' />"+
@@ -52,10 +52,11 @@ function changeStorage(element){
     var title=$(element).find(".myHiddenTitle").val();
     var text=$(element).find(".myText").val();
     var search=$("input.gLFyf").val();
+    var time=new Date().getTime();
     if(text==null || text==""){
         chrome.storage.sync.remove(APPTAG+url,function(){});
     }else{
-        chrome.storage.sync.set({[APPTAG+url]:[text,search,title]},function(){});
+        chrome.storage.sync.set({[APPTAG+url]:{"text":text,"search":search,"title":title,"time":time}},function(){});
     }
 }
 
